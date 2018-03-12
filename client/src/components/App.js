@@ -11,10 +11,21 @@ class App extends Component {
     this.props.fetchUser();
   }
 
+  renderView (user) {
+    switch (this.props.user) {
+      case null:
+        return;
+      case false:
+        return ( <Login /> )
+      default:
+        return ( <Dashboard /> )
+    }
+  }
+
   render () {
     return (
       <div>
-        {this.props.user ? <Dashboard /> : <Login />}
+        {this.renderView(this.props.user)}
       </div>
     )
   }
