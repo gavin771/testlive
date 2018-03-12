@@ -19,3 +19,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/semantic/src
+/semantic/tasks
+/semantic/gulpfile.js
+/semantic/dist/components
+/semantic/dist/themes
+/semantic/dist/semantic.css
+/semantic/dist/semantic.js
+/semantic/dist/semantic.min.js
+semantic.json
