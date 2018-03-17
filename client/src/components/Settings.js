@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { Header, Divider } from 'semantic-ui-react';
 
-class Dashboard extends Component {
+class Settings extends Component {
   render () {
     return (
       <div>
-        <Header as='h1'>Control Center</Header>
-        <Divider />
+        <div>
+          <Header as='h1'>Settings</Header>
+          <Divider />
 
+        </div>
       </div>
     )
   }
 }
 
-export default Dashboard
+export default Settings
