@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700');
 
+body, .ui.menu{
+  font-family: 'Raleway', sans-serif;
+}
 .ui{
   border-radius: 0 !important;
 }
@@ -12,8 +15,4 @@
 .ui.text.container{
   font-family: 'Raleway', sans-serif;
   font-weight: 300
-}
-
-.ui.menu{
-  font-family: 'Raleway', sans-serif;
 }

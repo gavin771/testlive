@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import * as actions from '../actions'
 import Login from './Login'
 import Dashboard from './Dashboard'
-import Settings from './Settings'
+import Settings from './settings/Settings'
 
 class App extends Component {
 
