@@ -1,6 +1,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const mongoose = require('mongoose');
+const _ = require('lodash');
+
 const { gcID, gcs } = require('../config/keys');
 
 const User = mongoose.model('users');
@@ -30,7 +32,7 @@ passport.use(new GoogleStrategy({
       googleId: profile.id,
       displayName: profile.displayName,
       email: profile.emails[0].value,
-      photo: profile.photos[0].value,
+      photo: _.replace(profile.photos[0].value,'sz=50','sz=300'),
     }).save()
     done(null, newUser);
   }

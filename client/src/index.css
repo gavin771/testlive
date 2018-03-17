@@ -3,7 +3,7 @@
 body, .ui.menu{
   font-family: 'Raleway', sans-serif;
 }
-.ui{
+.ui.segment{
   border-radius: 0 !important;
 }
 

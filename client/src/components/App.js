@@ -28,8 +28,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ user }) {
-  return { user };
-}
-
-export default connect(mapStateToProps, actions)(App);
+export default connect(null, actions)(App);
