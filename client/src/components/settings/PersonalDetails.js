@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
-import { Segment } from 'semantic-ui-react';
+import { Segment, Header } from 'semantic-ui-react';
 
 class PersonalDetails extends Component {
   render () {
     return (
-      <Segment raised>
-        Pellentesque habitant morbi tristique senectus.
-      </Segment>
+      <div>
+        <Header as='h3' attached='top'>
+          <Header.Content>
+            Personal Details
+          </Header.Content>
+        </Header>
+
+        <Segment raised color="red" attached>
+
+        </Segment>
+      </div>
     )
   }
 }

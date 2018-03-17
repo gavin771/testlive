@@ -31,7 +31,7 @@ class Settings extends Component {
           <Header as='h1'>Settings</Header>
           <Divider />
         </Container>
-        <Container style={{ marginTop: '3em' }} textAlign='center'>
+        <Container style={{ marginTop: '3em' }}>
         {this.renderContent()}
         </Container>
       </div>
