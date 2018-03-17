@@ -21,5 +21,6 @@ require('./services/passport');
 
 //Routes
 require('./routes/auth')(app);
+require('./routes/user')(app);
 
 app.listen(process.env.PORT || 5000);

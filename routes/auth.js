@@ -18,10 +18,6 @@ module.exports = (app) => {
     res.redirect('/')
   });
 
-  app.get('/api/me', (req, res) => {
-    res.send(req.user);
-  });
-
   app.get('/', (req, res) => {
     res.send('SheetRail Server');
   });
