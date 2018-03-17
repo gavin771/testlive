@@ -18,7 +18,7 @@ class Login extends Component {
           verticalAlign='middle'
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Segment passed>
+            <Segment padded>
               <Header as='h2' textAlign='center' content='SheetRail' />
               <p>Making it easier to collaborate on active test runs</p>
               <Button inverted color='red' href="/auth/google">

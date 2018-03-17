@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import reduxThunk from 'redux-thunk';
-import 'semantic-ui-css/semantic.min.css';
 
+import 'semantic-ui-css/semantic.min.css';
+import './index.css'
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
