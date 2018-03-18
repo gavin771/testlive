@@ -12,10 +12,10 @@ class Settings extends Component {
     return (
       <Grid columns={2}>
         <Grid.Row>
-          <Grid.Column>
+          <Grid.Column mobile={16} tablet={16} computer={8} style={{marginBottom:'50px'}}>
             <PersonalDetails />
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column mobile={16} tablet={16} computer={8}>
             <TestRailDetails />
           </Grid.Column>
         </Grid.Row>

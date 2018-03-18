@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import FormField from "./FormField";
 import FormMessage from './FormMessage';
 import { saveTestRailData } from '../../actions'
+import axios from 'axios';
 
 class TestRailDetails extends Component {
 
@@ -12,20 +13,36 @@ class TestRailDetails extends Component {
     super();
 
     this.state = {
-      testReponse: ''
+      testResponse: undefined,
+      testStatus: undefined,
+      testing: false
+    }
+  }
+  resetState = () => {
+    console.log('clearing state')
+    this.setState({
+      testResponse: undefined,
+      testStatus: undefined,
+      testing: false
+    });
+  }
+  testConnection = async () => {
+    this.setState({ testing: true });
+    try {
+      const res = await axios.post(`/api/testrail/test`, this.props.formValues.testRailForm.values);
+      //console.log(res.data);
+
+      this.setState({ testStatus: res.status, testResponse: res.data.error, testing: false })
+    } catch (err) {
+      //console.log(err.response)
+      this.setState({ testStatus: err.response.status, testResponse: err.response.data.error, testing: false })
     }
   }
 
-  testConnection () {
-    //test test rail connection & set state
-  }
-
   render () {
+    //console.log(this.state);
 
     const { handleSubmit, submitting, dirty } = this.props
-    //const domain = this.props.user ? this.props.user.testRailDomain : '';
-    //const username = this.props.user ? this.props.user.testRailUsername : '';
-    //const api = this.props.user ? this.props.user.api : '';
     const form = this.props.formValues
     const formDomain = form.testRailForm && form.testRailForm.values ? form.testRailForm.values.domain : '';
     const formApi = form.testRailForm && form.testRailForm.values ? form.testRailForm.values.api : '';
@@ -41,7 +58,7 @@ class TestRailDetails extends Component {
         </Header>
 
         <Segment raised color="teal" attached>
-          <SemanticForm loading={submitting}>
+          <SemanticForm loading={submitting || this.state.testing}>
             <SemanticForm.Group widths={2}>
               <ReduxField
                 key='domain'
@@ -65,14 +82,15 @@ class TestRailDetails extends Component {
               type='text'
               label='TestRail API Key'
             />
-            {this.props.error || this.props.submitSucceeded ?
-              <FormMessage error={this.props.error} dirty={this.props.dirty} success={this.props.submitSucceeded} testResponse={this.state.testReponse} /> : ''}
+            {this.props.error || this.props.submitSucceeded || this.state.testStatus ?
+              <FormMessage clearState={this.resetState} error={this.props.error} dirty={this.props.dirty} success={this.props.submitSucceeded} testResponse={this.state.testResponse} testStatus={this.state.testStatus} />
+              : ''}
           </SemanticForm>
         </Segment>
 
 
         <Button.Group attached='bottom'>
-          <Button primary onClick={this.testConnection()} disabled={!formDomain || !formApi || !formUsername}>Test Connection</Button>
+          <Button primary onClick={this.testConnection} disabled={!formDomain || !formApi || !formUsername}>Test Connection</Button>
           <Button color='green' onClick={handleSubmit(this.props.saveTestRailData)} disabled={!dirty || !formDomain || !formApi || !formUsername || submitting}>Save Details</Button>
         </Button.Group>
       </div>
@@ -101,9 +119,9 @@ function mapStateToProps (state) {
     testRailFormError: state.testRailFormError,
     user: state.user,
     initialValues: {
-      domain: state.user?state.user.testRailDomain:'',
-      username: state.user?state.user.testRailUsername:'',
-      api: state.user?state.user.testRailApi:''
+      domain: state.user ? state.user.testRailDomain : '',
+      username: state.user ? state.user.testRailUsername : '',
+      api: state.user ? state.user.testRailApi : ''
     }
   }
 }
