@@ -3,13 +3,34 @@ import { Segment, Button, Header, Form as SemanticForm } from 'semantic-ui-react
 import { reduxForm, Field as ReduxField } from 'redux-form'
 import { connect } from "react-redux";
 import FormField from "./FormField";
+import FormMessage from './FormMessage';
 import { saveTestRailData } from '../../actions'
 
 class TestRailDetails extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      testReponse: ''
+    }
+  }
+
+  testConnection () {
+    //test test rail connection & set state
+  }
+
   render () {
+    //console.log(this.props)
+
+    const { handleSubmit, submitting } = this.props
     const domain = this.props.user ? this.props.user.domain : '';
     const api = this.props.user ? this.props.user.api : '';
+    const form = this.props.formValues
+    const formDomain = form.testRailForm && form.testRailForm.values ? form.testRailForm.values.domain : '';
+    const formApi = form.testRailForm && form.testRailForm.values ? form.testRailForm.values.api : '';
 
+    //console.log(formDomain)
     return (
       <div>
         <Header as='h3' attached='top'>
@@ -19,7 +40,7 @@ class TestRailDetails extends Component {
         </Header>
 
         <Segment raised color="teal" attached>
-          <SemanticForm>
+          <SemanticForm loading={submitting}>
             <SemanticForm.Group widths={2}>
               <ReduxField
                 key='domain'
@@ -38,12 +59,15 @@ class TestRailDetails extends Component {
                 value={api}
               />
             </SemanticForm.Group>
+            {this.props.error || this.props.submitSucceeded ?
+              <FormMessage error={this.props.error} dirty={this.props.dirty} success={this.props.submitSucceeded} testResponse={this.state.testReponse} /> : ''}
           </SemanticForm>
         </Segment>
 
+
         <Button.Group attached='bottom'>
-          <Button primary>Test Connection</Button>
-          <Button color='green' onClick={this.props.handleSubmit(this.props.saveTestRailData)}>Save Details</Button>
+          <Button primary onClick={this.testConnection()} disabled={!formDomain || !formApi}>Test Connection</Button>
+          <Button color='green' onClick={handleSubmit(this.props.saveTestRailData)} disabled={!formDomain || !formApi || submitting}>Save Details</Button>
         </Button.Group>
       </div>
     )
@@ -64,7 +88,15 @@ function validate (values) {
   return errors
 }
 
-export default connect(null, { saveTestRailData })(reduxForm({
+function mapStateToProps (state) {
+  //console.log(state)
+  return {
+    formValues: state.form,
+    testRailFormError: state.testRailFormError
+  }
+}
+
+export default connect(mapStateToProps, { saveTestRailData })(reduxForm({
   form: 'testRailForm',
   validate,
 })(TestRailDetails));

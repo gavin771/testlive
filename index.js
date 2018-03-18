@@ -3,10 +3,12 @@ const app = express();
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser')
 const { cookieKey, mongoURI } = require('./config/keys');
 
 mongoose.connect(mongoURI);
 
+app.use(bodyParser.json());
 app.use(
   cookieSession({
     maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
@@ -22,6 +24,7 @@ require('./services/passport');
 //Routes
 require('./routes/auth')(app);
 require('./routes/user')(app);
+require('./routes/testrail')(app);
 
 if (process.env.NODE_ENV === 'production') {
   //look in client/build for file that match unknown requests
