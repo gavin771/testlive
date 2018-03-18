@@ -12,8 +12,9 @@ module.exports = (app) => {
     //console.log(`saving ${data}`)
     try {
       const url = new URL(data.domain);
-      req.user.domain = url;
-      req.user.api = data.api;
+      req.user.testRailDomain = url;
+      req.user.testRailApi = data.api;
+      req.user.testRailUsername = data.username;
       const user = await req.user.save();
       res.status(200).send(user);
     } catch (err) {
