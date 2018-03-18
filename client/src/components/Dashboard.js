@@ -4,6 +4,7 @@ import { Header, Divider, Container } from 'semantic-ui-react'
 import AppHeader from './AppHeader'
 
 class Dashboard extends Component {
+  
   render () {
     return (
       <div className="dashboard">

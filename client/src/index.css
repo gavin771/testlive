@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700');
 
-body, .ui.menu{
+body, 
+.ui.menu,
+.ui.button{
   font-family: 'Raleway', sans-serif;
 }
 .ui.segment{
@@ -15,4 +17,16 @@ body, .ui.menu{
 .ui.text.container{
   font-family: 'Raleway', sans-serif;
   font-weight: 300
+}
+
+.ui.input > input,
+.ui.input > input:focus{
+  border-top:0 !important;
+  border-right:0 !important;
+  border-left: 0 !important;
+  border-radius:0 !important;
+}
+
+.ui.button{
+  font-weight:500
 }

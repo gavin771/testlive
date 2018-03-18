@@ -6,7 +6,7 @@ module.exports = (app) => {
     res.send(req.user);
   });
 
-  app.patch('/api/me', [isLoggedIn], (req, res) => {
+  app.post('/api/me', [isLoggedIn], (req, res) => {
     console.log(req.body);
 
     res.send(req.user);

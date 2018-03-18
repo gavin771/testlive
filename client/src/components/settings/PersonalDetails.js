@@ -9,10 +9,10 @@ class PersonalDetails extends Component {
   }
 
   render () {
-    console.log(this.props.user)
+    //console.log(this.props.user)
     return (
       <div>
-        <Header as='h2' attached='top'>
+        <Header as='h3' attached='top'>
           <Header.Content>
             Personal Details
           </Header.Content>
@@ -24,9 +24,9 @@ class PersonalDetails extends Component {
               <Image src={this.props.user ? this.props.user.photo : ''} size='medium' circular />
             </Grid.Column>
             <Grid.Column verticalAlign='middle'>
-              <Header as='h3'>Name</Header>
+              <Header as='h4' content='Name'/>
               {this.props.user ? this.props.user.displayName : ''}
-              <Header as='h3'>Email</Header>
+              <Header as='h4' content='Email'/>
               {this.props.user ? this.props.user.email : ''}
             </Grid.Column>
           </Grid>
