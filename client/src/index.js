@@ -7,10 +7,10 @@ import reduxThunk from 'redux-thunk';
 import 'semantic-ui-css/semantic.min.css';
 import './index.css'
 import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk))
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-registerServiceWorker();
+//registerServiceWorker();

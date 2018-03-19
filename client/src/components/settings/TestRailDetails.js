@@ -18,6 +18,7 @@ class TestRailDetails extends Component {
       testing: false
     }
   }
+
   resetState = () => {
     console.log('clearing state')
     this.setState({
@@ -26,6 +27,7 @@ class TestRailDetails extends Component {
       testing: false
     });
   }
+
   testConnection = async () => {
     this.setState({ testing: true });
     try {
@@ -47,6 +49,10 @@ class TestRailDetails extends Component {
     const formDomain = form.testRailForm && form.testRailForm.values ? form.testRailForm.values.domain : '';
     const formApi = form.testRailForm && form.testRailForm.values ? form.testRailForm.values.api : '';
     const formUsername = form.testRailForm && form.testRailForm.values ? form.testRailForm.values.username : '';
+
+    if (submitting) {
+      //this.resetState()
+    }
 
     //console.log(this.props)
     return (
@@ -83,7 +89,7 @@ class TestRailDetails extends Component {
               label='TestRail API Key'
             />
             {this.props.error || this.props.submitSucceeded || this.state.testStatus ?
-              <FormMessage clearState={this.resetState} error={this.props.error} dirty={this.props.dirty} success={this.props.submitSucceeded} testResponse={this.state.testResponse} testStatus={this.state.testStatus} />
+              <FormMessage error={this.props.error} dirty={this.props.dirty} success={this.props.submitSucceeded} testResponse={this.state.testResponse} testStatus={this.state.testStatus} />
               : ''}
           </SemanticForm>
         </Segment>
@@ -91,7 +97,13 @@ class TestRailDetails extends Component {
 
         <Button.Group attached='bottom'>
           <Button primary onClick={this.testConnection} disabled={!formDomain || !formApi || !formUsername}>Test Connection</Button>
-          <Button color='green' onClick={handleSubmit(this.props.saveTestRailData)} disabled={!dirty || !formDomain || !formApi || !formUsername || submitting}>Save Details</Button>
+          <Button
+            color='green'
+            onClick={handleSubmit((values) => { this.resetState(); return this.props.saveTestRailData(values) })}
+            disabled={!dirty || !formDomain || !formApi || !formUsername || submitting}
+          >
+            Save Details
+            </Button>
         </Button.Group>
       </div>
     )
